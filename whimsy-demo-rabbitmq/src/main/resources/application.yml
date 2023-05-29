@@ -1,5 +1,5 @@
 server:
-  port: 7001
+  port: 7000
 
 spring:
   rabbitmq:
@@ -7,3 +7,21 @@ spring:
     password: guest
     host: 139.9.240.64
     port: 5673
+    virtual-host: demo
+
+business:
+  rabbitmq:
+    clock:
+      exchange: ptms.direct.exchange
+      queue: clock.queue
+      routing: clock
+
+    todo:
+      exchange: ptms.direct.exchange
+      queue: todo.queue
+      routing: todo
+
+    notice:
+      exchange: ptms.direct.exchange
+      queue: notice.queue
+      routing: notice

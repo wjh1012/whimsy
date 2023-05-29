@@ -3,6 +3,7 @@ package cn.wangjiahang;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author jh.wang
@@ -10,8 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @EnableRabbit
-public class RabbitMqDemoApplication {
+@EnableScheduling
+public class RabbitMqDemoProduceApplication7000 {
     public static void main(String[] args)  {
-        SpringApplication.run(RabbitMqDemoApplication.class, args);
+        SpringApplication.run(RabbitMqDemoProduceApplication7000.class, args);
     }
 }
