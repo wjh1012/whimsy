@@ -1,4 +1,4 @@
-package cn.wangjiahang.advanced.config;
+package cn.wangjiahang.whimsy.advanced.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.*;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author jh.wang
- * @since 2023/5/28
+ * Create on 2023/5/28
  */
 @Configuration
 @RequiredArgsConstructor

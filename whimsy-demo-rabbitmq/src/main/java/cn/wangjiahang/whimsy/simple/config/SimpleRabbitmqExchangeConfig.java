@@ -1,4 +1,4 @@
-package cn.wangjiahang.simple.config;
+package cn.wangjiahang.whimsy.simple.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author jh.wang
- * @since 2023/5/20
+ * Create on 2023/5/20
  */
 @Configuration
 public class SimpleRabbitmqExchangeConfig {

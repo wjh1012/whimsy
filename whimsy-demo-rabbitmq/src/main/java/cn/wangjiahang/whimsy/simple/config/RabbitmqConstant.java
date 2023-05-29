@@ -1,8 +1,8 @@
-package cn.wangjiahang.simple.config;
+package cn.wangjiahang.whimsy.simple.config;
 
 /**
  * @author jh.wang
- * @since 2023/5/20
+ * Create on 2023/5/20
  */
 
 public interface RabbitmqConstant {

@@ -1,4 +1,4 @@
-package cn.wangjiahang.simple;
+package cn.wangjiahang.whimsy.simple;
 
 import cn.hutool.core.date.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author jh.wang
- * @since 2023/5/21
+ * Create on 2023/5/21
  */
 
 @RestController

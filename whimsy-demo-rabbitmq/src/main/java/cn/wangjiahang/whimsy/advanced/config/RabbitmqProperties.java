@@ -1,4 +1,4 @@
-package cn.wangjiahang.advanced.config;
+package cn.wangjiahang.whimsy.advanced.config;
 
 import lombok.Data;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author jh.wang
- * @since 2023/5/28
+ * Create on 2023/5/28
  */
 @Data
 @Component

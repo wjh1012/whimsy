@@ -1,4 +1,4 @@
-package cn.wangjiahang;
+package cn.wangjiahang.whimsy;
 
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author jh.wang
- * @since 2023/5/18
+ * Create on 2023/5/18
  */
 @SpringBootApplication
 @EnableRabbit

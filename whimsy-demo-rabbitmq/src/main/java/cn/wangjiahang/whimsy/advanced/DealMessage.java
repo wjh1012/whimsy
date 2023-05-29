@@ -1,7 +1,7 @@
-package cn.wangjiahang.advanced;
+package cn.wangjiahang.whimsy.advanced;
 
 import cn.hutool.core.thread.ThreadUtil;
-import cn.wangjiahang.advanced.config.RabbitmqProperties;
+import cn.wangjiahang.whimsy.advanced.config.RabbitmqProperties;
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 /**
  * @author jh.wang
- * @since 2023/5/28
+ * Create on 2023/5/28
  */
 @Service
 @RequiredArgsConstructor

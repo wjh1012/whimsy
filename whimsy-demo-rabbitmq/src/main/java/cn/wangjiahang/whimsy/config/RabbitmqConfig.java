@@ -1,4 +1,4 @@
-package cn.wangjiahang.config;
+package cn.wangjiahang.whimsy.config;
 
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -13,7 +13,7 @@ import java.util.Objects;
 
 /**
  * @author jh.wang
- * @since 2023/5/28
+ * Create on 2023/5/28
  */
 @Configuration
 public class RabbitmqConfig {

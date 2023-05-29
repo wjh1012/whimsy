@@ -1,15 +1,13 @@
-package cn.wangjiahang.advanced;
+package cn.wangjiahang.whimsy.advanced;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.RandomUtil;
-import cn.wangjiahang.advanced.config.RabbitmqProperties;
+import cn.wangjiahang.whimsy.advanced.config.RabbitmqProperties;
 import com.google.gson.Gson;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +16,7 @@ import java.util.Map;
 
 /**
  * @author jh.wang
- * @since 2023/5/28
+ * Create on 2023/5/28
  */
 @RestController
 @RequiredArgsConstructor
