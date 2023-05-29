@@ -11,10 +11,7 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @RequiredArgsConstructor
+@ConditionalOnWebApplication
 @ConditionalOnClass(AmazonS3.class)
 @EnableConfigurationProperties(OssProperties.class)
 @ConditionalOnProperty(name = "oss.enabled", matchIfMissing = true, havingValue = "true")
