@@ -1,7 +1,7 @@
 package cn.wangjiahang.whimsy;
 
-import cn.wangjiahang.whimsy.core.OssTemplate;
-import cn.wangjiahang.whimsy.core.OssTemplateImpl;
+import cn.wangjiahang.whimsy.core.DefaultOssClient;
+import cn.wangjiahang.whimsy.core.OssClient;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
@@ -22,15 +22,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @RequiredArgsConstructor
-@ConditionalOnWebApplication
 @ConditionalOnClass(AmazonS3.class)
 @EnableConfigurationProperties(OssProperties.class)
-@ConditionalOnProperty(name = "oss.enabled", matchIfMissing = true, havingValue = "true")
+@ConditionalOnProperty(prefix = "oss", name = "enable", matchIfMissing = true, havingValue = "true")
 public class OssAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public AmazonS3 ossClient(OssProperties ossProperties) {
+    public AmazonS3 ossOriginalClient(OssProperties ossProperties) {
         // 客户端配置，主要是全局的配置信息
         ClientConfiguration clientConfiguration = new ClientConfiguration();
         clientConfiguration.setMaxConnections(ossProperties.getMaxConnections());
@@ -53,12 +52,5 @@ public class OssAutoConfiguration {
                 .disableChunkedEncoding()
                 .withPathStyleAccessEnabled(ossProperties.getPathStyleAccess())
                 .build();
-    }
-
-    @Bean
-    @ConditionalOnBean(AmazonS3.class)
-    @ConditionalOnMissingBean
-    public OssTemplate ossTemplate(AmazonS3 amazonS3){
-        return new OssTemplateImpl(amazonS3);
     }
 }

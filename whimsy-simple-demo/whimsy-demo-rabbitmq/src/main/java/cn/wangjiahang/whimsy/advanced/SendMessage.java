@@ -1,5 +1,6 @@
 package cn.wangjiahang.whimsy.advanced;
 
+import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.wangjiahang.whimsy.advanced.config.RabbitmqProperties;

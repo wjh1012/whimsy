@@ -34,6 +34,11 @@ public class OssProperties {
     private String secretKey;
 
     /**
+     * 默认使用的bucket
+     */
+    private String defaultBucket;
+
+    /**
      * 最大线程数，默认：100
      */
     private Integer maxConnections = 100;
