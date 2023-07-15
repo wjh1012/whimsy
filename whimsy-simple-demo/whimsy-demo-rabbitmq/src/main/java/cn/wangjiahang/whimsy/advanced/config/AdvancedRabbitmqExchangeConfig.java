@@ -5,6 +5,9 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author jh.wang
  * Create on 2023/5/28
@@ -14,56 +17,57 @@ import org.springframework.context.annotation.Configuration;
 public class AdvancedRabbitmqExchangeConfig {
     private final RabbitmqProperties properties;
 
-    // clock
+    // ########### demo start ###########
 
     @Bean
-    public DirectExchange clockExchange(){
-        return ExchangeBuilder.directExchange(properties.clock.exchange).build();
+    public DirectExchange demoExchange(){
+        return ExchangeBuilder.directExchange(properties.demo.exchange).build();
+    }
+
+    /**
+     * 转发到 死信队列，配置参数
+     */
+    private Map<String, Object> deadQueueArgs() {
+        Map<String, Object> map = new HashMap<>();
+        // 绑定该队列到私信交换机
+        map.put("x-dead-letter-exchange", properties.demo.dead.exchange);
+        map.put("x-dead-letter-routing-key", properties.demo.dead.routing);
+        return map;
     }
 
     @Bean
-    public Queue clockQueue(){
-        return QueueBuilder.durable(properties.clock.queue).build();
+    public Queue demoQueue(){
+        return QueueBuilder.durable(properties.demo.queue).withArguments(deadQueueArgs()).build();
     }
 
     @Bean
-    public Binding clockExchangeQueue(DirectExchange clockExchange, Queue clockQueue){
-        return BindingBuilder.bind(clockQueue).to(clockExchange).with(properties.clock.routing);
+    public Binding demoExchangeQueue(DirectExchange demoExchange, Queue demoQueue){
+        return BindingBuilder.bind(demoQueue).to(demoExchange).with(properties.demo.routing);
     }
 
-    // notice
+
+    // ########### demo end ###########
+
+    // ########### demo-dead start ###########
 
     @Bean
-    public DirectExchange noticeExchange(){
-        return ExchangeBuilder.directExchange(properties.notice.exchange).build();
-    }
-
-    @Bean
-    public Queue noticeQueue(){
-        return QueueBuilder.durable(properties.notice.queue).build();
+    public DirectExchange demoDeadExchange() {
+        return ExchangeBuilder.directExchange(properties.demo.dead.exchange).build();
     }
 
     @Bean
-    public Binding noticeExchangeQueue(DirectExchange noticeExchange, Queue noticeQueue){
-        return BindingBuilder.bind(noticeQueue).to(noticeExchange).with(properties.notice.routing);
-    }
-
-    // todo
-
-    @Bean
-    public DirectExchange todoExchange(){
-        return ExchangeBuilder.directExchange(properties.todo.exchange).build();
+    public Queue demoDeadQueue(){
+        return QueueBuilder.durable(properties.demo.dead.queue).build();
     }
 
     @Bean
-    public Queue todoQueue(){
-        return QueueBuilder.durable(properties.todo.queue).build();
+    public Binding demoDeadExchangeQueue(DirectExchange demoDeadExchange, Queue demoDeadQueue){
+        return BindingBuilder.bind(demoDeadQueue).to(demoDeadExchange).with(properties.demo.dead.routing);
     }
 
-    @Bean
-    public Binding todoExchangeQueue(DirectExchange todoExchange, Queue todoQueue){
-        return BindingBuilder.bind(todoQueue).to(todoExchange).with(properties.todo.routing);
-    }
+    // ########### demo-dead end ###########
+
+
 }
 
 

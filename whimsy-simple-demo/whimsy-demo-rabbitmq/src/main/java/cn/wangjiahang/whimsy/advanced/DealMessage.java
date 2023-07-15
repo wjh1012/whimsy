@@ -1,11 +1,16 @@
 package cn.wangjiahang.whimsy.advanced;
 
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import cn.wangjiahang.whimsy.advanced.config.RabbitmqProperties;
+import cn.wangjiahang.whimsy.advanced.message.enums.ReceiveMessageType;
+import cn.wangjiahang.whimsy.advanced.message.service.ReceiveMessageService;
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -13,6 +18,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author jh.wang
@@ -24,45 +30,37 @@ import java.io.IOException;
 public class DealMessage {
     public final RabbitmqProperties properties;
     public final Gson gson;
+    public final ReceiveMessageService receiveMessageService;
 
-    @RabbitListener(queues = "${business.rabbitmq.clock.queue}", replyContentType = "application/json", ackMode = "MANUAL")
-    public void clock1(Clock msg, Message message, Channel channel) throws IOException {
-        ThreadUtil.sleep(500);
-        log.info("clock1处理打卡: {}-{}", msg.t, msg.u);
+    @RabbitListener(queues = "${business.rabbitmq.delete-notice.queue}", ackMode = "MANUAL")
+    @SneakyThrows
+    public void deal(Message message, Channel channel) {
+        long startTime = System.currentTimeMillis();
 
-        doThing(msg, message, channel);
-    }
+        String body = new String(message.getBody(), StandardCharsets.UTF_8);
+        String sourceKey = message.getMessageProperties().getMessageId();
 
-    @RabbitListener(queues = "${business.rabbitmq.clock.queue}", replyContentType = "application/json", ackMode = "MANUAL")
-    public void clock2(@Payload Clock msg, Message message, Channel channel) throws IOException {
-        ThreadUtil.sleep(450);
-        log.info("clock2处理打卡: {}-{}", msg.t, msg.u);
-
-        doThing(msg, message, channel);
-    }
-
-    private void doThing(@Payload Clock msg, Message message, Channel channel) throws IOException {
         try {
-            if (msg.u.contains("5")) {
-                throw new RuntimeException();
-            }
+            // do thing...
+
+            // 保存履历
+            receiveMessageService.saveSuccessMessage(sourceKey, po ->{
+                po.setContent(body);
+                po.setSourceKey(sourceKey);
+                po.setType(ReceiveMessageType.DELETE_NOTICE);
+            });
             // do thing...
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+            log.info("xxx处理成功, 消息业务id: {}, 耗时: {}毫秒", sourceKey, System.currentTimeMillis() - startTime);
         } catch (Exception e) {
-            // 消息被处理过
-            if (message.getMessageProperties().getRedelivered()) {
-                log.warn("【{}】的该消息被拒绝过，不再放回到队列：{}", msg.u, gson.toJson(msg));
-                // 被拒绝一次之后，不再放到队列中
-                channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
-            }
-            log.warn("【{}】打卡的消息第一次被拒绝，再放回到队列：{}", msg.u, gson.toJson(msg));
-            channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+            log.error(StrUtil.format("xxx处理失败, 消息业务id: {}, 消息内容: {}", sourceKey, body), e);
+            receiveMessageService.saveFailMessage(sourceKey, po ->{
+                po.setContent(body);
+                po.setType(ReceiveMessageType.DELETE_NOTICE);
+                po.setSourceKey(sourceKey);
+                po.setRemark(e.getMessage());
+            });
+            channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
         }
-    }
-
-    @Data
-    static class Clock {
-        String u;
-        Long t;
     }
 }

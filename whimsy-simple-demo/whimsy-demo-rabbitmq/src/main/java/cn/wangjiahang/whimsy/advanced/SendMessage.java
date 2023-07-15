@@ -28,21 +28,23 @@ public class SendMessage {
     private final Gson gson;
 
     @PostMapping("send")
-    public Map<String, String> send(){
-        final Map<Object, Object> data = MapUtil.builder().put("u", RandomUtil.randomNumbers(5)).put("t", String.valueOf(System.currentTimeMillis())).build();
+    public String send(Integer size){
+        for (int i = 0; i <( size == null ? 1 : size); i++) {
+            final Map<Object, Object> data = MapUtil.builder()
+                    .put("u", RandomUtil.randomNumbers(5))
+                    .put("t", String.valueOf(System.currentTimeMillis()))
+                    .put("s", RandomUtil.randomBoolean())
+                    .build();
 
-//        final String jsonData = gson.toJson(data);
-        final Clock clock = Clock.builder().t(System.currentTimeMillis()).u(RandomUtil.randomNumbers(5)).build();
-        rabbitTemplate.convertAndSend(properties.clock.exchange, properties.clock.routing, clock);
+            rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
+                log.info("correlationData：{} , ack:{}", correlationData.getId(), ack);
+                if (!ack) {
+                    System.out.println("进行对应的消息补偿机制");
+                }
+            });
+            rabbitTemplate.convertAndSend(properties.demo.exchange, properties.demo.routing, data);
+        }
 
-        // log.info("打卡: {}", jsonData)
-        return MapUtil.builder("code", "200").build();
-    }
-
-    @Data
-    @Builder
-    static class Clock {
-        String u;
-        Long t;
+        return "{}";
     }
 }

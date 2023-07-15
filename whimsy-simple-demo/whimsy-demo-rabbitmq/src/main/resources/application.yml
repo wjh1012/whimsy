@@ -6,22 +6,21 @@ spring:
     username: guest
     password: guest
     host: 139.9.240.64
-    port: 5673
-    virtual-host: demo
+    port: 5672
+    virtual-host: /demo
+    #消费端配置
+    listener:
+      simple:
+        #自动签收auto  手动 manual
+        acknowledge-mode: manual
 
 business:
   rabbitmq:
-    clock:
-      exchange: ptms.direct.exchange
-      queue: clock.queue
-      routing: clock
-
-    todo:
-      exchange: ptms.direct.exchange
-      queue: todo.queue
-      routing: todo
-
-    notice:
-      exchange: ptms.direct.exchange
-      queue: notice.queue
-      routing: notice
+    demo:
+      exchange: demo.exchange
+      queue: demo.queue
+      routing: demo
+      dead:
+        exchange: dead.demo.exchange
+        queue: dead.demo.queue
+        routing: dead.demo

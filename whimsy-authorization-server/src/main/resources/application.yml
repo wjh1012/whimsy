@@ -1,29 +1,28 @@
 server:
-  port: 7010
+  port: 5000
 
 spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: false
+        web-allow-others: false
+  datasource:
+    url: jdbc:h2:file:./data/sample_db;MODE=MYSQL;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE;
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      schema-locations: classpath:init-db/authentication.sql
+      mode: always
+
   security:
-    oauth2:
-      authorizationserver:
-        client:
-          oidc-client:
-            registration:
-              client-id: "oidc-client"
-              client-secret: "{noop}secret"
-              client-authentication-methods:
-                - "client_secret_basic"
-              authorization-grant-types:
-                - "authorization_code"
-                - "refresh_token"
-              redirect-uris:
-                - "http://127.0.0.1:8080/login/oauth2/code/oidc-client"
-              post-logout-redirect-uris:
-                - "http://127.0.0.1:8080/"
-              scopes:
-                - "openid"
-                - "profile"
-            require-authorization-consent: true
+
 
 logging:
   level:
-    org.springframework.security: trace
+    org.springframework.security: debug
+    cn.wangjiahang: debug
+    root: debug
