@@ -21,6 +21,7 @@
 
         <!-- data other -->
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <querydsl.version>5.0.0</querydsl.version>
         <mysql8.version>8.0.29</mysql8.version>
 
         <!-- util -->
@@ -65,6 +66,33 @@
                 <version>${mysql8.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-core</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl.version}</version>
+                <classifier>jakarta</classifier>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-sql</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-sql-spring</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>${querydsl.version}</version>
+                <classifier>jakarta</classifier>
+            </dependency>
             <!-- util -->
             <dependency>
                 <groupId>org.projectlombok</groupId>

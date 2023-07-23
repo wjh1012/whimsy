@@ -54,7 +54,7 @@
                     <configuration>
                         <excludes>
                             <exclude>
-                                
+
                             </exclude>
                         </excludes>
                     </configuration>

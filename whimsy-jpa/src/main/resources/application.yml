@@ -1,0 +1,20 @@
+server:
+  port: 7020
+
+spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: false
+        web-allow-others: false
+  datasource:
+    url: jdbc:h2:file:./data/jpa/sample_db;MODE=MYSQL;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE;
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 可选项：create, create-drop, update, validate, none
+    show-sql: true     # 是否打印SQL语句
