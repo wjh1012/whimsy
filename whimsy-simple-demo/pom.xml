@@ -9,8 +9,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>whimsy-demo-oss</module>
+        <module>whimsy-demo-file-oss_starter</module>
+        <module>whimsy-demo-jpa</module>
         <module>whimsy-demo-rabbitmq</module>
+        <module>whimsy-demo-file-xuyanwu</module>
     </modules>
 
     <properties>

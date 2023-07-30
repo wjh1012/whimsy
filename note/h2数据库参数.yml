@@ -1,6 +1,3 @@
-server:
-  port: 5000
-
 spring:
   h2:
     console:
@@ -17,12 +14,3 @@ spring:
     init:
       schema-locations: classpath:init-db/authentication.sql
       mode: always
-
-  security:
-
-
-logging:
-  level:
-    org.springframework.security: debug
-    cn.wangjiahang: debug
-    root: debug

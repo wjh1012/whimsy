@@ -19,7 +19,7 @@
         <spring.data.redis.version/>
         <spring.data.elasticsearch.version/>
 
-        <!-- data other -->
+        <!-- database -->
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <querydsl.version>5.0.0</querydsl.version>
         <mysql8.version>8.0.29</mysql8.version>
@@ -31,7 +31,11 @@
         <vavr.version>1.0.0-alpha-4</vavr.version>
         <apache.commons.version>3.12.0</apache.commons.version>
         <gson.version>2.10.1</gson.version>
+
+        <!-- 对象存储 -->
         <aws.version>1.12.466</aws.version>
+        <xuyanwu.file.version>0.7.0</xuyanwu.file.version>
+        <minio.version>8.5.2</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -128,6 +132,19 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${apache.commons.version}</version>
+            </dependency>
+
+            <!-- database -->
+            <dependency>
+                <groupId>cn.xuyanwu</groupId>
+                <artifactId>spring-file-storage</artifactId>
+                <version>${xuyanwu.file.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
             <dependency>
