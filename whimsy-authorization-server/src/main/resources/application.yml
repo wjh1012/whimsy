@@ -2,27 +2,17 @@ server:
   port: 5000
 
 spring:
-  h2:
-    console:
-      enabled: true
-      settings:
-        trace: false
-        web-allow-others: false
   datasource:
-    url: jdbc:h2:file:./data/auth/auth_server;MODE=MYSQL;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE;
+    url: jdbc:mysql://139.9.240.64:3306/auth_server?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
-    driver-class-name: org.h2.Driver
-  sql:
-    init:
-      schema-locations: classpath:init-db/authentication.sql
-      mode: always
 
-  security:
-
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 logging:
   level:
-    org.springframework.security: debug
+#    org.springframework.security: debug
     cn.wangjiahang: debug
-    root: debug

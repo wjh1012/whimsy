@@ -1,11 +1,10 @@
-package cn.wangjiahang.whimsy.auth.bo;
+package cn.wangjiahang.whimsy.authorization.application.command;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Set;
  * @since 2023/6/4
  */
 @Data
-public class RegisterClientDto {
+public class RegisterClientCreateCommand {
     @NotBlank(message = "client id 不能为空!")
     private String clientId;
     @NotBlank(message = "client secret 不能为空!")
