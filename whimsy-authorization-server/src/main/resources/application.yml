@@ -6,10 +6,45 @@ spring:
     url: jdbc:mysql://139.9.240.64:3306/auth_server?useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  thymeleaf:
+    mode: HTML
+    cache: false
+    prefix: classpath:/static/
+
+  web:
+    resources:
+      static-locations:
+        - classpath:/static/
+  mvc:
+    static-path-pattern: /static/**
+
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          oidc-client:
+            registration:
+              client-id: "oidc-client"
+              client-secret: "oidc-secret"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "authorization_code"
+                - "refresh_token"
+              redirect-uris:
+                - "http://127.0.0.1:5173/login"
+              post-logout-redirect-uris:
+                - "http://127.0.0.1:5173/"
+              scopes:
+                - "openid"
+                - "profile"
+            require-authorization-consent: true
 
   jpa:
     hibernate:
-      ddl-auto: update
+      # ddl-auto: update
     show-sql: true
 
 logging:

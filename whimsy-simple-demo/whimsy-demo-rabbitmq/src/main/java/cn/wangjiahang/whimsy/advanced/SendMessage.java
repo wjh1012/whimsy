@@ -22,7 +22,6 @@ import java.util.Map;
 public class SendMessage {
     private final RabbitmqProperties properties;
     private final RabbitTemplate rabbitTemplate;
-    private final Gson gson;
 
     @PostMapping("send")
     public String send(Integer size){

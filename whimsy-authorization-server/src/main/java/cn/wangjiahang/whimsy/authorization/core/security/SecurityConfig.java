@@ -1,11 +1,14 @@
 package cn.wangjiahang.whimsy.authorization.core.security;
 
 import cn.wangjiahang.whimsy.authorization.domain.sys.ClientRegisteredService;
+import cn.wangjiahang.whimsy.authorization.domain.sys.service.UserService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -54,18 +57,11 @@ import java.util.UUID;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    /**
-     * 验证码放行
-     */
-    public static final List<String> VERIFY_CODE_WHITE_LIST = List.of();
-
-
     @Bean
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                .oidc(Customizer.withDefaults());
+        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());
         http
                 // Redirect to the login page when not authenticated from the
                 // authorization endpoint
@@ -84,16 +80,16 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(VERIFY_CODE_WHITE_LIST.toArray(new String[0]))
-                        .permitAll()
-                        .requestMatchers("/register/client")
+                        .requestMatchers("/index","/static/**", "/_app.config.js")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
-                .formLogin(Customizer.withDefaults())
+                .formLogin(loginPage -> {
+                    loginPage.loginPage("/index");
+                })
                 .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
@@ -114,16 +110,6 @@ public class SecurityConfig {
         return new CorsFilter(source);
     }
 
-    /**
-     * 用户详情service, jdbc版本
-     *
-     * @param dataSource
-     * @return
-     */
-    @Bean
-    public UserDetailsService userDetailsService(JdbcUserDetailsManager jdbcUserDetailsManager) {
-        return jdbcUserDetailsManager;
-    }
 
     @Bean
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
@@ -197,7 +183,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService){
+    public AuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder, UserService userDetailsService){
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(passwordEncoder);
         authenticationProvider.setUserDetailsService(userDetailsService);
         return authenticationProvider;

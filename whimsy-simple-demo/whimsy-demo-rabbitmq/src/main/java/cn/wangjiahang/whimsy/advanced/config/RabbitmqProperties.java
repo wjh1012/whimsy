@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "business.rabbitmq")
 public class RabbitmqProperties {
     public Properties demo;
+    public Properties clock;
 
     @PostConstruct
     public void init(){

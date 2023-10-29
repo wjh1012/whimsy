@@ -38,24 +38,24 @@ public class BaseEntity implements Serializable {
     private String remark;
 
     @CreatedBy
-    @Column(name = "createBy", updatable = false)
+    @Column(name = "createBy", updatable = false, nullable = false)
     @Comment("创建人")
     private Long createBy;
 
     @CreatedDate
-    @Column(name = "createTime", updatable = false, columnDefinition = "datetime")
+    @Column(name = "createTime", updatable = false, nullable = false, columnDefinition = "datetime")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Comment("创建时间")
     private Date createTime;
 
     @LastModifiedBy
-    @Column(name = "updateBy", nullable = false)
+    @Column(name = "updateBy")
     @Comment("修改人")
     private Long updateBy;
 
     @LastModifiedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name = "updateTime", nullable = false, columnDefinition = "datetime")
+    @Column(name = "updateTime", columnDefinition = "datetime")
     @Comment("修改时间")
     private Date updateTime;
 }

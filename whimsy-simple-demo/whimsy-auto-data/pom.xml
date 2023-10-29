@@ -6,6 +6,13 @@
 
     <groupId>cn.wnagjiahang.whimsy</groupId>
     <artifactId>whimsy-auto-data</artifactId>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>cn.wnagjiahang</groupId>
+        <artifactId>whimsy-simple-demo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

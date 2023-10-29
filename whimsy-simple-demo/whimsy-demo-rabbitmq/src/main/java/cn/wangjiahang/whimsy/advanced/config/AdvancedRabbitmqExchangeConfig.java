@@ -68,6 +68,26 @@ public class AdvancedRabbitmqExchangeConfig {
     // ########### demo-dead end ###########
 
 
+    // ########### health-clock start ###########
+
+    @Bean
+    public DirectExchange healthClockExchange() {
+        return ExchangeBuilder.directExchange(properties.clock.exchange).build();
+    }
+
+    @Bean
+    public Queue healthClockQueue(){
+        return QueueBuilder.durable(properties.clock.queue).build();
+    }
+
+    @Bean
+    public Binding healthClockQueueExchangeQueueBinging(DirectExchange healthClockExchange, Queue healthClockQueue){
+        return BindingBuilder.bind(healthClockQueue).to(healthClockExchange).with(properties.clock.routing);
+    }
+
+    // ########### health-clock end ###########
+
+
 }
 
 
