@@ -4,7 +4,7 @@ package cn.wangjiahang.whimsy.domain.message.repository;
 import cn.hutool.core.util.StrUtil;
 import cn.wangjiahang.whimsy.domain.message.enums.ReceiveMessageStatus;
 import cn.wangjiahang.whimsy.domain.message.enums.ReceiveMessageType;
-import cn.wangjiahang.jpa.domain.message.po.QReceiveMessage;
+import cn.wangjiahang.whimsy.domain.message.po.QReceiveMessage;
 import cn.wangjiahang.whimsy.domain.message.po.ReceiveMessage;
 import cn.wangjiahang.whimsy.domain.message.mapper.ReceiveMessageMapper;
 import com.querydsl.core.BooleanBuilder;
