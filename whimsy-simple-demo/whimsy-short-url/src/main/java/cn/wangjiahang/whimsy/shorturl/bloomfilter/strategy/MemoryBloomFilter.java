@@ -1,0 +1,41 @@
+package cn.wangjiahang.whimsy.shorturl.bloomfilter.strategy;
+
+import cn.wangjiahang.whimsy.shorturl.bloomfilter.MyBloomFilter;
+import com.google.common.base.Charsets;
+import com.google.common.hash.BloomFilter;
+import com.google.common.hash.Funnels;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.annotation.PostConstruct;
+
+/**
+ * @author jh.wang
+ * @since 2024/4/28
+ */
+public class MemoryBloomFilter implements MyBloomFilter {
+    @Value("${bloom-filter.expected-insertions}")
+    private int expectedInsertions;
+    @Value("${bloom-filter.fpp}")
+    private double fpp;
+
+    private BloomFilter<String> BLOOM_FILTER;
+
+    @PostConstruct
+    public void init() {
+        BLOOM_FILTER = BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), expectedInsertions, fpp);
+    }
+
+    @Override
+    public boolean check(String sign) {
+        return BLOOM_FILTER.mightContain(sign);
+    }
+
+    @Override
+    public boolean put(String sign) {
+        return BLOOM_FILTER.put(sign);
+    }
+
+
+}

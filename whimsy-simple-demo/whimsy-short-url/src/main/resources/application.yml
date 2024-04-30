@@ -1,0 +1,27 @@
+bloom-filter:
+  enabled: true
+  type: memory
+  expected-insertions: 1000000  # 期望插入的元素数量
+  fpp: 0.1  # 误判率
+
+domain: http://link.wangjiahang.cn/
+
+spring:
+  redis:
+    host: 127.0.0.1
+    database: 1
+    port: 6380
+
+  datasource:
+    url: jdbc:h2:./data/shortUrl/short_url;AUTO_SERVER=TRUE;MODE=MYSQL
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+    #启用SQL语句的日志记录
+    show-sql: true
