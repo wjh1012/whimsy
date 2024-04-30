@@ -28,6 +28,11 @@ public class MemoryBloomFilter implements MyBloomFilter {
     }
 
     @Override
+    public boolean enabled() {
+        return true;
+    }
+
+    @Override
     public boolean check(String sign) {
         return bloomFilter.mightContain(sign);
     }

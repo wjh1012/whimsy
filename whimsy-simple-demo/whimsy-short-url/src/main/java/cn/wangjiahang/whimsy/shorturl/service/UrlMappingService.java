@@ -30,7 +30,8 @@ public class UrlMappingService {
 
         final boolean exists = bloomFilter.check(shortUrl);
 
-        if (exists) {
+        // 布隆过滤器标记为存在 或 未启用布隆过滤器 => 去数据库检查
+        if (exists || !bloomFilter.enabled()) {
             final Integer countByShortUrl = urlMappingRepository.getCountByShortUrl(shortUrl);
             if (countByShortUrl != null && countByShortUrl > 0) {
                 return shortUrl;

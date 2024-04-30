@@ -1,5 +1,5 @@
 bloom-filter:
-  enabled: true
+  enabled: false
   type: redis
   expected-insertions: 1000000  # 期望插入的元素数量
   fpp: 0.1  # 误判率

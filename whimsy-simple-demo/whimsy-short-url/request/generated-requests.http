@@ -1,0 +1,9 @@
+###
+@url = http://baidu.com
+POST http://localhost:8080/url/createShortUrl?url={{url}}
+Content-Type: application/x-www-form-urlencoded
+
+###
+@key = 5R70LcuUY3L
+# @no-redirect
+GET http://localhost:8080/url/{{key}}

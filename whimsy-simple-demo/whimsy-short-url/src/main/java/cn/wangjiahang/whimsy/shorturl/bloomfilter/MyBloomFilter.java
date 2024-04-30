@@ -6,6 +6,9 @@ package cn.wangjiahang.whimsy.shorturl.bloomfilter;
  */
 
 public interface MyBloomFilter {
+    default boolean enabled() {
+        return false;
+    }
 
     boolean check(String sign);
 

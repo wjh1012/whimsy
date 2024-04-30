@@ -40,6 +40,11 @@ public class RedisBloomFilter implements MyBloomFilter {
     }
 
     @Override
+    public boolean enabled() {
+        return true;
+    }
+
+    @Override
     public boolean check(String sign) {
         return bloomFilter.contains(sign);
     }
