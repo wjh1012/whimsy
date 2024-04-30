@@ -4,7 +4,6 @@ import cn.wangjiahang.whimsy.shorturl.bloomfilter.strategy.EmptyBloomFilter;
 import cn.wangjiahang.whimsy.shorturl.bloomfilter.strategy.MemoryBloomFilter;
 import cn.wangjiahang.whimsy.shorturl.bloomfilter.strategy.RedisBloomFilter;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;

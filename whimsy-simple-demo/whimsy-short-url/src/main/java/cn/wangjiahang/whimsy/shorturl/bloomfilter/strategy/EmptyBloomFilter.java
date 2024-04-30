@@ -16,6 +16,6 @@ public class EmptyBloomFilter implements MyBloomFilter {
 
     @Override
     public boolean put(String sign) {
-        return false;
+        return true;
     }
 }
