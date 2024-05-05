@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "lib": [
+      "DOM",
+      "ES2015.Promise",
+      "ES5"
+    ],
+    "types": ["node"]
+  }
+}

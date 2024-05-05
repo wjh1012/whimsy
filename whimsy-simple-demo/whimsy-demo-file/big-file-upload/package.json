@@ -1,0 +1,29 @@
+{
+  "name": "big-file-upload",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode dev",
+    "test": "vite --mode test",
+    "pro": "vite --mode pro",
+    "build:dev": "vue-tsc --noEmit && vite build --mode dev",
+    "build:test": "vue-tsc --noEmit && vite build --mode test",
+    "build:pro": "vue-tsc --noEmit && vite build --mode pro",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "axios": "^1.6.8",
+    "element-plus": "^2.7.2",
+    "spark-md5": "^3.0.2",
+    "unplugin-auto-import": "^0.17.5",
+    "vue": "^3.4.21",
+    "vue-simple-uploader": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.8",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.8"
+  }
+}
