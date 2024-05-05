@@ -90,15 +90,24 @@ public class FileDetailController {
     }
 
 
+    /**
+     * 初始化 分片信息
+     * @param fileUploadInfo
+     * @return
+     */
     @GetMapping(value = "/uploader/chunk")
     public FileInfo init(FileUploadInfo fileUploadInfo) {
         return fileStorageService.initiateMultipartUpload()
                 .setSize(fileUploadInfo.getTotalSize())
-                .setObjectId(fileUploadInfo.getIdentifier())
                 .setOriginalFilename(fileUploadInfo.getFilename())
                 .init();
     }
 
+    /**
+     * 上海 分片文件
+     * @param fileUploadInfo
+     * @return
+     */
     @PostMapping(value = "/uploader/chunk")
     public void bigFile(FileUploadInfo fileUploadInfo) {
         final FileInfo fileInfo = fileStorageService.getFileInfoByUrl(fileUploadInfo.getUrl());
@@ -113,12 +122,23 @@ public class FileDetailController {
                         fileWrapper, fileUploadInfo.getCurrentChunkSize().longValue()).upload();
     }
 
+    /**
+     * 合并 分片文件
+     * @param url
+     * @return
+     */
     @PostMapping(value = "/uploader/merge")
     public FileInfo merge(@RequestParam String url) {
         final FileInfo fileInfo = fileStorageService.getFileInfoByUrl(url);
         return fileStorageService.completeMultipartUpload(fileInfo).complete();
     }
 
+    /**
+     * 下载文件
+     * @param url
+     * @param response
+     * @throws IOException
+     */
     @PostMapping(value = "/download")
     public void download(@RequestParam String url, HttpServletResponse response) throws IOException {
         fileStorageService.download(url).outputStream(response.getOutputStream());

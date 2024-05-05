@@ -1,4 +1,3 @@
--- 这里使用的是 mysql
 CREATE TABLE `file_detail`
 (
     `id`                varchar(32)  NOT NULL COMMENT '文件id',
