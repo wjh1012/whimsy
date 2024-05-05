@@ -1,0 +1,27 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/test_file/file;AUTO_SERVER=TRUE;MODE=MYSQL;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 201MB
+
+dromara:
+  x-file-storage:
+    default-platform: minio
+    minio:
+      - platform: minio
+        enable-storage: true
+        access-key: zygoJJAKsIZHyXkdKfa4
+        secret-key: RBd3Coi6LJnJPEhv6IEUEEnhm0Mums4VMi1bS6SK
+        end-point: http://192.168.64.129:9000
+        bucket-name: test
+        domain:
+        base-path:
