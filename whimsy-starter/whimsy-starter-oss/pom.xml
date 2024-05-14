@@ -10,7 +10,7 @@
     </properties>
 
     <parent>
-        <groupId>cn.wnagjiahang.whimsy</groupId>
+        <groupId>cn.wangjiahang.whimsy</groupId>
         <artifactId>whimsy-starter</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>

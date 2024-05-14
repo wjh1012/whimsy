@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: service-6000
+
+  profiles:
+    active: @spring.profiles.active@

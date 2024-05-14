@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>whimsy-cache</artifactId>
-    <groupId>cn.wnagjiahang</groupId>
+    <groupId>cn.wangjiahang</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

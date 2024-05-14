@@ -1,0 +1,36 @@
+server:
+  port: 6010
+
+env:
+  nacos:
+    ip: ${NACOS_IP:127.0.0.1}
+    port: ${NACOS_PORT:8848}
+    namespace: ${NACOS_NAMESPACE:}
+    group: ${NACOS_GROUP:}
+
+spring:
+  cloud:
+    loadbalancer:
+      nacos:
+        enabled: true
+
+    nacos:
+      discovery:
+        server-addr: ${env.nacos.ip}:${env.nacos.port}
+        group: ${env.nacos.group}
+        namespace: ${env.nacos.namespace}
+
+      server-addr: ${env.nacos.ip}:${env.nacos.port}
+      username: nacos
+      password: nacos
+
+      config:
+        group: ${env.nacos.group}
+        namespace: ${env.nacos.namespace}
+        file-extension: yaml
+        username: nacos
+        password: nacos
+
+  config:
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true

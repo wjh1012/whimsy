@@ -4,16 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.wnagjiahang.whimsy</groupId>
+    <groupId>cn.wangjiahang.whimsy</groupId>
     <artifactId>whimsy-bom</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0</version>
 
     <packaging>pom</packaging>
 
     <properties>
         <!-- spring -->
-        <spring.boot.version>3.1.0</spring.boot.version>
-        <spring.cloud.version>2022.0.0.0-RC2</spring.cloud.version>
+        <!-- spring boot版本          : https://spring.io/projects/spring-boot#learn -->
+        <!-- spring cloud版本         : https://spring.io/projects/spring-cloud#overview -->
+        <!-- spring cloud alibaba版本 : https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E
+                                        https://github.com/alibaba/spring-cloud-alibaba/wiki
+                                        https://github.com/alibaba/spring-cloud-alibaba/releases
+        -->
+
+        <spring.boot.version>3.2.4</spring.boot.version>
+        <spring.cloud-alibaba.version>2023.0.1.0</spring.cloud-alibaba.version>
+        <spring.cloud.version>2023.0.1</spring.cloud.version>
 
         <!-- data spring -->
         <spring.data.redis.version/>
@@ -22,7 +30,7 @@
         <!-- database -->
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <mysql8.version>8.0.29</mysql8.version>
+        <mysql8.version>8.0.33</mysql8.version>
 
         <!-- util -->
         <lambok.version>1.18.24</lambok.version>
@@ -35,6 +43,7 @@
         <!-- 对象存储 -->
         <aws.version>1.12.466</aws.version>
         <xuyanwu.file.version>0.7.0</xuyanwu.file.version>
+        <x-file-storage-spring>2.1.0</x-file-storage-spring>
         <minio.version>8.5.2</minio.version>
     </properties>
 
@@ -44,7 +53,7 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
+                <version>${spring.cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -53,6 +62,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -134,11 +151,16 @@
                 <version>${apache.commons.version}</version>
             </dependency>
 
-            <!-- database -->
             <dependency>
                 <groupId>cn.xuyanwu</groupId>
                 <artifactId>spring-file-storage</artifactId>
                 <version>${xuyanwu.file.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.dromara.x-file-storage</groupId>
+                <artifactId>x-file-storage-spring</artifactId>
+                <version>${x-file-storage-spring}</version>
             </dependency>
 
             <dependency>

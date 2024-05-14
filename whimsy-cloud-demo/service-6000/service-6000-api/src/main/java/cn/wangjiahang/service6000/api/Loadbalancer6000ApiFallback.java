@@ -1,0 +1,12 @@
+package cn.wangjiahang.service6000.api;
+
+/**
+ * @author jh.wang
+ * @since 2024/5/14
+ */
+public class Loadbalancer6000ApiFallback implements Loadbalancer6000Api {
+    @Override
+    public String testPort(Integer error) {
+        return "连接超时";
+    }
+}

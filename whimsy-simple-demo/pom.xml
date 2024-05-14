@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.wnagjiahang</groupId>
+    <groupId>cn.wangjiahang</groupId>
     <artifactId>whimsy-simple-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -22,15 +22,15 @@
     </properties>
 
     <parent>
-        <groupId>cn.wnagjiahang.whimsy</groupId>
-        <artifactId>whimsy-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>cn.wangjiahang.whimsy</groupId>
+        <artifactId>whimsy-bom</artifactId>
+        <version>1.1.0</version>
     </parent>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>cn.wnagjiahang.whimsy</groupId>
+                <groupId>cn.wangjiahang.whimsy</groupId>
                 <artifactId>whimsy-starter-oss</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>

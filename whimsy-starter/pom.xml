@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.wnagjiahang.whimsy</groupId>
-        <artifactId>whimsy-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>cn.wangjiahang.whimsy</groupId>
+        <artifactId>whimsy-bom</artifactId>
+        <version>1.1.0</version>
     </parent>
 
     <artifactId>whimsy-starter</artifactId>

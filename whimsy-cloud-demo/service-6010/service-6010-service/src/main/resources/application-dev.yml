@@ -1,0 +1,44 @@
+server:
+  port: 6010
+
+spring:
+  cloud:
+    loadbalancer:
+      nacos:
+        enabled: true
+
+    nacos:
+      discovery:
+        server-addr: @nacos.server-addr@
+        group: DEFAULT_GROUP
+        namespace: @nacos.namespase@
+
+      server-addr: @nacos.server-addr@
+      username: nacos
+      password: nacos
+
+      config:
+        group: DEFAULT_GROUP
+        namespace: @nacos.namespase@
+        file-extension: yaml
+        username: nacos
+        password: nacos
+
+  config:
+    # 文档: https://sca.aliyun.com/docs/2023/user-guide/nacos/advanced-guide/
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true
+
+feign:
+  sentinel:
+    enabled: true
+
+  client:
+    config:
+      # 这里用 default 就是全局配置，如果是写服务名称，则是针对某个服务的配置。
+      default:
+        # 日志级别（忽略大小写），包括：NONE（默认）、BASIC、HEADERS、FULL
+        loggerLevel: FULL
+
+system:
+  test-nacos: 值1
