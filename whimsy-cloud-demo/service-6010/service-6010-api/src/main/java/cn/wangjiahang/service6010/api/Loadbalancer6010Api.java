@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author jh.wang
  * @since 2024/5/14
  */
-@FeignClient(name = "service-6010-service")
+@FeignClient(name = "service-6010")
 public interface Loadbalancer6010Api {
     @GetMapping(value = "/test/host")
     String testPort();

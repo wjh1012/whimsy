@@ -8,14 +8,15 @@ spring:
         enabled: true
 
     nacos:
+      server-addr: @nacos.server-addr@
+      username: nacos
+      password: nacos
+      namespace: @nacos.namespase@
+
       discovery:
         server-addr: @nacos.server-addr@
         group: DEFAULT_GROUP
         namespace: @nacos.namespase@
-
-      server-addr: @nacos.server-addr@
-      username: nacos
-      password: nacos
 
       config:
         group: DEFAULT_GROUP
@@ -24,12 +25,39 @@ spring:
         username: nacos
         password: nacos
 
+    sentinel:
+      transport:
+        dashboard: 192.168.64.129:8858
+
+      datasource: #sentinel用nacos作为数据源的配置
+        flow-rule: #流控规则管理(这个名称可以自定义)
+          nacos: # 告诉sentinel用nacos作为数据源
+            groupId: SENTINEL_SETTING
+            data-id: ${spring.application.name}_sentinel-flow-config.json #nacos配置中心里执行文件的dataId
+            server-addr: ${spring.cloud.nacos.server-addr} #nacos的地址
+            username: ${spring.cloud.nacos.username} #nacos的用户名
+            password: ${spring.cloud.nacos.password} #nacos的密码
+            namespace: ${spring.cloud.nacos.namespace}
+            rule-type: flow #指定文件配置的是哪种规则 flow-流控,degrade-熔断,param-flow热点参数,system-系统保护,authority-授权,gw-flow gateway网关流控,gw-api-group
+        degrade-rule: #降级规则管理(这个名称可以自定义)
+          nacos: # 告诉sentinel用nacos作为数据源
+            groupId: SENTINEL_SETTING
+            data-id: ${spring.application.name}_sentinel-degrade-config.json #nacos配置中心里执行文件的dataId
+            server-addr: ${spring.cloud.nacos.server-addr} #nacos的地址
+            username: ${spring.cloud.nacos.username} #nacos的用户名
+            password: ${spring.cloud.nacos.password} #nacos的密码
+            namespace: ${spring.cloud.nacos.namespace}
+            rule-type: degrade #指定文件配置的是哪种规则
+
   config:
     # 文档: https://sca.aliyun.com/docs/2023/user-guide/nacos/advanced-guide/
     import:
       - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true
 
 feign:
+  sentinel:
+    enabled: true
+
   client:
     config:
       # 这里用 default 就是全局配置，如果是写服务名称，则是针对某个服务的配置。
