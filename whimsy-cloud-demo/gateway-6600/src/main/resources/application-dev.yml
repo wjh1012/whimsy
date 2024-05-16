@@ -1,0 +1,66 @@
+server:
+  port: 6600
+
+spring:
+  cloud:
+    nacos:
+      server-addr: @nacos.server-addr@
+      username: nacos
+      password: nacos
+      namespace: @nacos.namespase@
+
+      discovery:
+        server-addr: @nacos.server-addr@
+        group: DEFAULT_GROUP
+        namespace: @nacos.namespase@
+
+      config:
+        group: DEFAULT_GROUP
+        namespace: @nacos.namespase@
+        file-extension: yaml
+        username: nacos
+        password: nacos
+
+    sentinel:
+      transport:
+        dashboard: 192.168.64.129:8858
+
+      scg:
+        order: -2147483648 # 过滤器顺序，默认为 -2147483648 最高优先级
+        fallback:
+          mode: # fallback 模式，目前有三种：response、redirect、空
+          # 专属 response 模式
+          response-status: 429 # 响应状态码，默认为 429
+          response-body: 你被 block 了... # 响应内容，默认为空
+          content-type: application/json # 内容类型，默认为 application/json
+          # 专属 redirect 模式
+          redirect: http://www.baidu.com
+
+      datasource: #sentinel用nacos作为数据源的配置
+        flow-rule: #流控规则管理(这个名称可以自定义)
+          nacos: # 告诉sentinel用nacos作为数据源
+            groupId: SENTINEL_SETTING
+            data-id: ${spring.application.name}_sentinel-flow-config.json #nacos配置中心里执行文件的dataId
+            server-addr: ${spring.cloud.nacos.server-addr} #nacos的地址
+            username: ${spring.cloud.nacos.username} #nacos的用户名
+            password: ${spring.cloud.nacos.password} #nacos的密码
+            namespace: ${spring.cloud.nacos.namespace}
+            rule-type: flow #指定文件配置的是哪种规则 flow-流控,degrade-熔断,param-flow热点参数,system-系统保护,authority-授权,gw-flow gateway网关流控,gw-api-group
+        degrade-rule: #降级规则管理(这个名称可以自定义)
+          nacos: # 告诉sentinel用nacos作为数据源
+            groupId: SENTINEL_SETTING
+            data-id: ${spring.application.name}_sentinel-degrade-config.json #nacos配置中心里执行文件的dataId
+            server-addr: ${spring.cloud.nacos.server-addr} #nacos的地址
+            username: ${spring.cloud.nacos.username} #nacos的用户名
+            password: ${spring.cloud.nacos.password} #nacos的密码
+            namespace: ${spring.cloud.nacos.namespace}
+            rule-type: degrade #指定文件配置的是哪种规则
+
+  config:
+    # 文档: https://sca.aliyun.com/docs/2023/user-guide/nacos/advanced-guide/
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true
+
+feign:
+  sentinel:
+    enabled: true

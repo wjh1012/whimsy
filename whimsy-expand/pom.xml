@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.wangjiahang.whimsy</groupId>
+        <artifactId>whimsy-bom</artifactId>
+        <version>1.1.0</version>
+    </parent>
+
+    <packaging>pom</packaging>
+
+    <groupId>cn.wangjiahang.whimsy.expand</groupId>
+    <artifactId>whimsy-expand</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <expand.sentinel-nacos-sync.version>1.0.0</expand.sentinel-nacos-sync.version>
+    </properties>
+
+    <modules>
+        <module>whimsy-sentinel-nacos-sync</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.wangjiahang.whimsy.expand</groupId>
+                <artifactId>whimsy-sentinel-nacos-sync</artifactId>
+                <version>${expand.sentinel-nacos-sync.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

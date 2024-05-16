@@ -45,6 +45,8 @@
         <xuyanwu.file.version>0.7.0</xuyanwu.file.version>
         <x-file-storage-spring>2.1.0</x-file-storage-spring>
         <minio.version>8.5.2</minio.version>
+
+        <whimsy-expand.version>1.0.0</whimsy-expand.version>
     </properties>
 
     <dependencyManagement>
@@ -173,6 +175,13 @@
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-s3</artifactId>
                 <version>${aws.version}</version>
+            </dependency>
+
+            <!-- inner project -->
+            <dependency>
+                <groupId>cn.wangjiahang.whimsy.expand</groupId>
+                <artifactId>whimsy-expand</artifactId>
+                <version>${whimsy-expand.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

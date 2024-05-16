@@ -1,11 +1,10 @@
-package cn.wangjiahang.config;
+package com.alibaba.csp.sentinel.datasource.nacos;
 
 import com.alibaba.cloud.sentinel.SentinelProperties;
 import com.alibaba.cloud.sentinel.custom.SentinelDataSourceHandler;
 import com.alibaba.cloud.sentinel.datasource.config.AbstractDataSourceProperties;
 import com.alibaba.cloud.sentinel.datasource.factorybean.NacosDataSourceFactoryBean;
 import com.alibaba.csp.sentinel.datasource.AbstractDataSource;
-import com.alibaba.csp.sentinel.datasource.nacos.NacosDataSource;
 import com.alibaba.csp.sentinel.property.PropertyListener;
 import com.alibaba.csp.sentinel.property.SentinelProperty;
 import com.alibaba.csp.sentinel.slots.block.AbstractRule;
@@ -17,14 +16,12 @@ import com.alibaba.csp.sentinel.slots.system.SystemRuleManager;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.shaded.com.google.gson.Gson;
 import com.alibaba.nacos.shaded.com.google.gson.GsonBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -33,7 +30,6 @@ import java.util.List;
  * @author jh.wang
  * @since 2024/5/16
  */
-@Component
 public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
     private static final Logger log = LoggerFactory.getLogger(SentinelDataSourceHandler.class);
     private final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -74,7 +70,7 @@ public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
                 });
     }
 
-    private void registerBean(final AbstractDataSourceProperties dataSourceProperties,
+    protected void registerBean(final AbstractDataSourceProperties dataSourceProperties,
                               String dataSourceName) {
         BeanDefinitionBuilder builder = parseBeanDefinition(dataSourceProperties, dataSourceName);
 
@@ -97,7 +93,7 @@ public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
         // dataSourceProperties.postRegister(newDataSource);
     }
 
-    private SentinelProperty expandSentinelProperty(AbstractDataSourceProperties dataSourceProperties, String dataSourceName, AbstractDataSource newDataSource) {
+    protected SentinelProperty expandSentinelProperty(AbstractDataSourceProperties dataSourceProperties, String dataSourceName, AbstractDataSource newDataSource) {
         // 从 spring 容器中 拿到对应的nacos 配置bean  规则为前面加一个 &
         final NacosDataSourceFactoryBean bean = this.beanFactory.getBean("&" + dataSourceName, NacosDataSourceFactoryBean.class);
         final SentinelProperty property = newDataSource.getProperty();

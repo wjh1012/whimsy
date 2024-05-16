@@ -20,6 +20,7 @@
     <modules>
         <module>service-6000</module>
         <module>service-6010</module>
+        <module>gateway-6600</module>
     </modules>
 
     <properties>
@@ -27,6 +28,18 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.wangjiahang.whimsy.expand</groupId>
+                <artifactId>whimsy-expand</artifactId>
+                <version>${whimsy-expand.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
     <profiles>

@@ -46,6 +46,10 @@
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.wangjiahang.whimsy.expand</groupId>
+            <artifactId>whimsy-sentinel-nacos-sync</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>cn.wangjiahang.demo.cloud</groupId>
