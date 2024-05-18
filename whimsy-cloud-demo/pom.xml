@@ -21,6 +21,7 @@
         <module>service-6000</module>
         <module>service-6010</module>
         <module>gateway-6600</module>
+        <module>authorization-6200</module>
     </modules>
 
     <properties>
