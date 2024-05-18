@@ -1,0 +1,27 @@
+server:
+  port: 6200
+
+spring:
+  cloud:
+    nacos:
+      server-addr: @nacos.server-addr@
+      username: nacos
+      password: nacos
+      namespace: @nacos.namespase@
+
+      discovery:
+        server-addr: @nacos.server-addr@
+        group: DEFAULT_GROUP
+        namespace: @nacos.namespase@
+
+      config:
+        group: DEFAULT_GROUP
+        namespace: @nacos.namespase@
+        file-extension: yaml
+        username: nacos
+        password: nacos
+
+  config:
+    # 文档: https://sca.aliyun.com/docs/2023/user-guide/nacos/advanced-guide/
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true

@@ -1,7 +1,9 @@
-server:
-  port: 6200
-
 spring:
+  application:
+    name: authorization-6200
+  profiles:
+    active: @spring.profiles.active@
+
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/authorization?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
     username: root
