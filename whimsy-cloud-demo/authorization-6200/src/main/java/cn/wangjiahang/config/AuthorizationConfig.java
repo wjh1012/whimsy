@@ -127,19 +127,26 @@ public class AuthorizationConfig {
                     methods.add(ClientAuthenticationMethod.CLIENT_SECRET_POST);
                 })
                 // 配置资源服务器使用该客户端获取授权时支持的方式
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .authorizationGrantTypes(authorizationGrantTypes -> {
+                    authorizationGrantTypes.add(AuthorizationGrantType.AUTHORIZATION_CODE);
+                    authorizationGrantTypes.add(AuthorizationGrantType.REFRESH_TOKEN);
+                    authorizationGrantTypes.add(AuthorizationGrantType.CLIENT_CREDENTIALS);
+                })
                 // 授权码模式回调地址，oauth2.1已改为精准匹配，不能只设置域名，并且屏蔽了localhost，本机使用127.0.0.1访问
-                .redirectUri("http://127.0.0.1:6200/authCode")
-                .redirectUri("http://127.0.0.1:6200/authToken")
-                .redirectUri("https://baidu.com")
+                .redirectUris(redirectUris -> {
+                    redirectUris.add("http://127.0.0.1:6200/authCode");
+                    redirectUris.add("http://127.0.0.1:6200/authToken");
+                    redirectUris.add("https://baidu.com");
+                    redirectUris.add("http://127.0.0.1:6600/login/oauth2/code/messaging-client-oidc");
+                })
                 // 该客户端的授权范围，OPENID与PROFILE是IdToken的scope，获取授权时请求OPENID的scope时认证服务会返回IdToken
-                .scope(OidcScopes.OPENID)
-                .scope(OidcScopes.PROFILE)
-                // 自定scope
-                .scope("message.read")
-                .scope("message.write")
+                .scopes(scopes -> {
+                    scopes.add(OidcScopes.OPENID);
+                    scopes.add(OidcScopes.PROFILE);
+                    // 自定scope
+                    scopes.add("message.read");
+                    scopes.add("message.write");
+                })
                 // 客户端设置，设置用户需要确认授权
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();

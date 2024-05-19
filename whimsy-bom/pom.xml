@@ -47,6 +47,10 @@
         <minio.version>8.5.2</minio.version>
 
         <whimsy-expand.version>1.0.0</whimsy-expand.version>
+
+
+        <!-- 漏洞修复 -->
+        <snakeyaml.version>2.0</snakeyaml.version>
     </properties>
 
     <dependencyManagement>
