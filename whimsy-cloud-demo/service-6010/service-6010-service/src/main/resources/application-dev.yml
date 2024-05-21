@@ -1,7 +1,43 @@
 server:
   port: 6010
 
+seata:
+  registry:
+    type: nacos
+    nacos:
+      server-addr: @nacos.server-addr@
+      namespace: @nacos.namespase@
+      group: SEATA_GROUP
+      applicatoin: seata-server
+      username: nacos
+      password: nacos
+  config:
+    type: nacos
+    nacos:
+      group: SEATA_GROUP
+      server-addr: @nacos.server-addr@
+      namespace: @nacos.namespase@
+      username: nacos
+      password: nacos
+      data-id: seata.properties
+
+  tx-service-group: default_tx_group
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+
 spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.4:3306/demo_cloud?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  sql:
+    init:
+      schema-locations: classpath:init-db/seata_demo_schema.sql
+      mode: always
+
   cloud:
     loadbalancer:
       nacos:
@@ -24,6 +60,10 @@ spring:
         file-extension: yaml
         username: nacos
         password: nacos
+  config:
+    # 文档: https://sca.aliyun.com/docs/2023/user-guide/nacos/advanced-guide/
+    import:
+      - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true
 
     sentinel:
       transport:
@@ -47,11 +87,6 @@ spring:
             password: ${spring.cloud.nacos.password} #nacos的密码
             namespace: ${spring.cloud.nacos.namespace}
             rule-type: degrade #指定文件配置的是哪种规则
-
-  config:
-    # 文档: https://sca.aliyun.com/docs/2023/user-guide/nacos/advanced-guide/
-    import:
-      - nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}?refreshEnabled=true
 
   security:
     oauth2:

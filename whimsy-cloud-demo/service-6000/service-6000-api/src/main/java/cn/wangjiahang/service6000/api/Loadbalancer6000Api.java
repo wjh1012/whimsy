@@ -12,4 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface Loadbalancer6000Api {
     @GetMapping(value = "/test/host")
     String testPort(@RequestParam(value = "error") Integer error);
+
+    @GetMapping(value = "/save")
+    String save(@RequestParam(value = "error") Integer error);
 }

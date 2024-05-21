@@ -118,6 +118,7 @@
                     <include>**/*.yml</include>
                     <include>**/*.yaml</include>
                     <include>**/*.properties</include>
+                    <include>**/**/*.sql</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>

@@ -28,7 +28,7 @@
         <spring.data.elasticsearch.version/>
 
         <!-- database -->
-        <mybatis-plus.version>3.5.6</mybatis-plus.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <querydsl.version>5.0.0</querydsl.version>
         <mysql8.version>8.0.33</mysql8.version>
 
@@ -84,6 +84,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 

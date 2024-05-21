@@ -7,6 +7,11 @@ package cn.wangjiahang.service6000.api;
 public class Loadbalancer6000ApiFallback implements Loadbalancer6000Api {
     @Override
     public String testPort(Integer error) {
-        return "连接超时";
+        return "操作失败";
+    }
+
+    @Override
+    public String save(Integer error) {
+        return "操作失败";
     }
 }
