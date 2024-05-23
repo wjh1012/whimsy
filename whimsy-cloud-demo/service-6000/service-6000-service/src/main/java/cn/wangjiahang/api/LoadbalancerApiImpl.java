@@ -1,6 +1,6 @@
 package cn.wangjiahang.api;
 
-import cn.wangjiahang.entity.TestSeataEntity;
+import cn.wangjiahang.entity.TestSeata;
 import cn.wangjiahang.service6000.api.Loadbalancer6000Api;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,8 +33,9 @@ public class LoadbalancerApiImpl implements Loadbalancer6000Api {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String save(Integer error) {
-        final TestSeataEntity testSeataEntity = new TestSeataEntity().setMoney(BigDecimal.valueOf(new Random().nextDouble()));
-        final boolean insert = testSeataEntity.insert();
+        final TestSeata testSeata = new TestSeata();
+        testSeata.setMoney(BigDecimal.valueOf(new Random().nextDouble()));
+        final boolean insert = testSeata.insert();
 
         if (error != null && error.equals(1)) {
             throw new IllegalArgumentException("手动异常");

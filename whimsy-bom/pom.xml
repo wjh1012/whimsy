@@ -22,6 +22,11 @@
         <spring.boot.version>3.2.4</spring.boot.version>
         <spring.cloud-alibaba.version>2023.0.1.0</spring.cloud-alibaba.version>
         <spring.cloud.version>2023.0.1</spring.cloud.version>
+        <brave.version>5.17.1</brave.version>
+        <zipkin-reporter.version>2.16.3</zipkin-reporter.version>
+        <micrometer.version>1.13.0</micrometer.version>
+
+        <micrometer-tracing.version>1.1.7</micrometer-tracing.version>
 
         <!-- data spring -->
         <spring.data.redis.version/>
@@ -46,8 +51,8 @@
         <x-file-storage-spring>2.1.0</x-file-storage-spring>
         <minio.version>8.5.2</minio.version>
 
+        <!-- 自己的 -->
         <whimsy-expand.version>1.0.0</whimsy-expand.version>
-
 
         <!-- 漏洞修复 -->
         <snakeyaml.version>2.0</snakeyaml.version>
@@ -80,6 +85,41 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-bom</artifactId>
+                <version>${micrometer.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.zipkin.reporter2</groupId>
+                <artifactId>zipkin-reporter-bom</artifactId>
+                <version>${zipkin-reporter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.brave</groupId>
+                <artifactId>brave-bom</artifactId>
+                <version>${brave.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Brave prior to v6 had a reporter dependency. Remove that to avoid conflicts. -->
+            <dependency>
+                <groupId>io.zipkin.brave</groupId>
+                <artifactId>brave</artifactId>
+                <version>${brave.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>*</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
             <!-- data other -->
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -90,12 +130,6 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql8.version}</version>
             </dependency>
 
             <dependency>

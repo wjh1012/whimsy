@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @since 2024/5/20
  */
 @Mapper
-public interface TestSeataMapper extends BaseMapper<TestSeataEntity> {
+public interface TestSeataMapper extends BaseMapper<TestSeata> {
 
 }

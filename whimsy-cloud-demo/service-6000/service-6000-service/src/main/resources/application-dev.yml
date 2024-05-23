@@ -1,6 +1,32 @@
 server:
   port: 6000
 
+# ========================zipkin===================
+management:
+  zipkin:
+    tracing:
+      endpoint: http://192.168.64.129:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 #采样率默认为0.1(0.1就是10次只能有一次被记录下来)，值越大收集越及时。
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: ''
+      path-mapping:
+        health: /health
+
+logging:
+  level:
+    root: INFO
+  pattern:
+    # Note: Logs don't appear to have any correlation fields assigned.
+    level: "[%X{user_name}] [%X{traceId}/%X{spanId}] %-5p [%t] %C{2} - %m%n"
+
+
 seata:
   registry:
     type: nacos
