@@ -13,6 +13,8 @@
         <module>whimsy-demo-jpa</module>
         <module>whimsy-demo-rabbitmq</module>
         <module>whimsy-demo-file-xuyanwu</module>
+        <module>whimsy-demo-redis</module>
+        <module>whimsy-demo-database</module>
     </modules>
 
     <properties>

@@ -5,6 +5,7 @@ import com.alibaba.cloud.sentinel.custom.SentinelDataSourceHandler;
 import com.alibaba.cloud.sentinel.datasource.config.AbstractDataSourceProperties;
 import com.alibaba.cloud.sentinel.datasource.factorybean.NacosDataSourceFactoryBean;
 import com.alibaba.csp.sentinel.datasource.AbstractDataSource;
+import com.alibaba.csp.sentinel.log.RecordLog;
 import com.alibaba.csp.sentinel.property.PropertyListener;
 import com.alibaba.csp.sentinel.property.SentinelProperty;
 import com.alibaba.csp.sentinel.slots.block.AbstractRule;
@@ -16,8 +17,6 @@ import com.alibaba.csp.sentinel.slots.system.SystemRuleManager;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.shaded.com.google.gson.Gson;
 import com.alibaba.nacos.shaded.com.google.gson.GsonBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.env.Environment;
@@ -31,7 +30,7 @@ import java.util.List;
  * @since 2024/5/16
  */
 public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
-    private static final Logger log = LoggerFactory.getLogger(SentinelDataSourceHandler.class);
+    // private static final Logger log = LoggerFactory.getLogger(SentinelDataSourceHandler.class);
     private final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private final DefaultListableBeanFactory beanFactory;
@@ -52,7 +51,7 @@ public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
                     try {
                         List<String> validFields = dataSourceProperties.getValidField();
                         if (validFields.size() != 1) {
-                            log.error("[Sentinel Starter] DataSource " + dataSourceName
+                            RecordLog.error("[Sentinel Starter] DataSource " + dataSourceName
                                     + " multi datasource active and won't loaded: "
                                     + dataSourceProperties.getValidField());
                             return;
@@ -64,7 +63,7 @@ public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
                         registerBean(abstractDataSourceProperties, dataSourceName
                                 + "-sentinel-" + validFields.get(0) + "-datasource");
                     } catch (Exception e) {
-                        log.error("[Sentinel Starter] DataSource " + dataSourceName
+                        RecordLog.error("[Sentinel Starter] DataSource " + dataSourceName
                                 + " build error: " + e.getMessage(), e);
                     }
                 });
@@ -84,8 +83,7 @@ public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
             case PARAM_FLOW -> ParamFlowRuleManager.register2Property(expandSentinelProperty(dataSourceProperties, dataSourceName, newDataSource));
             case SYSTEM -> SystemRuleManager.register2Property(expandSentinelProperty(dataSourceProperties, dataSourceName, newDataSource));
             case AUTHORITY -> AuthorityRuleManager.register2Property(expandSentinelProperty(dataSourceProperties, dataSourceName, newDataSource));
-            case GW_FLOW -> dataSourceProperties.postRegister(newDataSource);
-            case GW_API_GROUP -> dataSourceProperties.postRegister(newDataSource);
+            case GW_FLOW, GW_API_GROUP -> dataSourceProperties.postRegister(newDataSource);
         }
 
         // 使用自定义的 postRegister
@@ -121,7 +119,7 @@ public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
                 field.setAccessible(true);
                 configService = (ConfigService) field.get(object);
             } catch (Exception e) {
-                log.error("[NcoasPropertyListener] NacosDataSourceFactoryBean error: {}", e.getMessage(), e);
+                RecordLog.error("[NcoasPropertyListener] NacosDataSourceFactoryBean error: {}", e.getMessage(), e);
             }
         }
 
@@ -134,7 +132,7 @@ public class CustomSentinelDataSourceHandler extends SentinelDataSourceHandler {
             try {
                 configService.publishConfig(nacosDataSourceFactoryBean.getDataId(), nacosDataSourceFactoryBean.getGroupId(), gson.toJson(value), dataType);
             } catch (Exception e) {
-                log.error("推送 sentinel config 失败: {}", e.getMessage(), e);
+                RecordLog.error("推送 sentinel config 失败: {}", e.getMessage(), e);
             }
         }
 

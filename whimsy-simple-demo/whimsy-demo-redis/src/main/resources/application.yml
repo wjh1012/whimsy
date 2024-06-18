@@ -1,0 +1,13 @@
+server:
+  port: 7030
+  address:
+
+spring:
+  application:
+    name: whimsy-demo-redis
+
+  data:
+    redis:
+      host: 192.168.64.129
+      port: 6380
+      password: 123456

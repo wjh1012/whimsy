@@ -37,6 +37,8 @@
         <querydsl.version>5.0.0</querydsl.version>
         <mysql8.version>8.0.33</mysql8.version>
 
+        <redisson.version>3.30.0</redisson.version>
+
         <!-- util -->
         <lambok.version>1.18.24</lambok.version>
         <hutool-all.version>5.8.19</hutool-all.version>
@@ -165,6 +167,14 @@
                 <artifactId>lombok</artifactId>
                 <version>${lambok.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>cn.hutool</groupId>
