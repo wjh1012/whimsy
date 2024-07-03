@@ -1,0 +1,151 @@
+{
+  "changeLog": [
+    {
+      "id": 1,
+      "show": "使能",
+      "status": ""
+    },
+    {
+      "id": 2,
+      "show": "",
+      "status": "初始化"
+    },
+    {
+      "id": 3,
+      "show": "",
+      "status": "成功"
+    },
+    {
+      "id": 4,
+      "show": "",
+      "status": "失败"
+    },
+    {
+      "id": 5,
+      "show": "不使能",
+      "status": ""
+    }
+  ],
+  "verifySubject": [
+    {
+      "show": null,
+      "status": null,
+      "children": [
+        {
+          "show": null,
+          "status": null,
+          "children": [
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 2
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 2
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "show": null,
+      "status": null,
+      "children": [
+        {
+          "show": null,
+          "status": null,
+          "children": [
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 3
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 3
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "show": null,
+      "status": null,
+      "children": [
+        {
+          "show": null,
+          "status": null,
+          "children": [
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 4
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 3
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 1,
+              "statusId": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "show": null,
+      "status": null,
+      "children": [
+        {
+          "show": null,
+          "status": null,
+          "children": [
+            {
+              "show": null,
+              "status": null,
+              "showId": 5,
+              "statusId": 4
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 5,
+              "statusId": 3
+            },
+            {
+              "show": null,
+              "status": null,
+              "showId": 5,
+              "statusId": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

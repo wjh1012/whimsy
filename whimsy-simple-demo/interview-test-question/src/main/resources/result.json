@@ -1,0 +1,138 @@
+{
+  "id": 1808396276560621568,
+  "children": [
+    {
+      "id": 1808396276560621569,
+      "parentId": 1808396276560621568,
+      "status": "初始化",
+      "children": [
+        {
+          "id": 1808396276560621570,
+          "parentId": 1808396276560621569,
+          "show": "使能",
+          "status": "初始化",
+          "children": [
+            {
+              "id": 1808396276560621571,
+              "parentId": 1808396276560621570,
+              "showId": 1,
+              "statusId": 2,
+              "show": "使能",
+              "status": "初始化",
+              "validData": true
+            },
+            {
+              "id": 1808396276560621572,
+              "parentId": 1808396276560621570,
+              "showId": 1,
+              "statusId": 2,
+              "show": "使能",
+              "status": "初始化",
+              "validData": true
+            },
+            {
+              "id": 1808396276560621573,
+              "parentId": 1808396276560621570,
+              "showId": 1,
+              "statusId": 2,
+              "show": "使能",
+              "status": "初始化",
+              "validData": true
+            }
+          ],
+          "validData": true
+        }
+      ],
+      "validData": true
+    },
+    {
+      "id": 1808396276560621574,
+      "parentId": 1808396276560621568,
+      "status": "成功",
+      "children": [
+        {
+          "id": 1808396276560621575,
+          "parentId": 1808396276560621574,
+          "show": "使能",
+          "status": "成功",
+          "children": [
+            {
+              "id": 1808396276560621576,
+              "parentId": 1808396276560621575,
+              "showId": 1,
+              "statusId": 3,
+              "show": "使能",
+              "status": "成功",
+              "validData": true
+            },
+            {
+              "id": 1808396276560621577,
+              "parentId": 1808396276560621575,
+              "showId": 1,
+              "statusId": 3,
+              "show": "使能",
+              "status": "成功",
+              "validData": true
+            },
+            {
+              "id": 1808396276560621578,
+              "parentId": 1808396276560621575,
+              "showId": 1,
+              "statusId": 3,
+              "show": "使能",
+              "status": "成功",
+              "validData": true
+            }
+          ],
+          "validData": true
+        }
+      ],
+      "validData": true
+    },
+    {
+      "id": 1808396276560621579,
+      "parentId": 1808396276560621568,
+      "status": "失败",
+      "children": [
+        {
+          "id": 1808396276560621580,
+          "parentId": 1808396276560621579,
+          "show": "使能",
+          "status": "失败",
+          "children": [
+            {
+              "id": 1808396276560621581,
+              "parentId": 1808396276560621580,
+              "showId": 1,
+              "statusId": 4,
+              "show": "使能",
+              "status": "失败",
+              "validData": true
+            },
+            {
+              "id": 1808396276560621582,
+              "parentId": 1808396276560621580,
+              "showId": 1,
+              "statusId": 3,
+              "show": "使能",
+              "status": "成功",
+              "validData": true
+            },
+            {
+              "id": 1808396276560621583,
+              "parentId": 1808396276560621580,
+              "showId": 1,
+              "statusId": 3,
+              "show": "使能",
+              "status": "成功",
+              "validData": true
+            }
+          ],
+          "validData": true
+        }
+      ],
+      "validData": true
+    }
+  ],
+  "validData": true
+}
